@@ -1,0 +1,13 @@
+.App {
+  margin: 0px;
+}
+
+.dark{
+	background-color: #333;
+	color: #e2e1e1;
+}
+
+.light{
+	background-color: #e2e1e1;
+	color: #333;
+}
