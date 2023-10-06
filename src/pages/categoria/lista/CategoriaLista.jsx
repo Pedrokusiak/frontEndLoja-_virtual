@@ -1,41 +1,41 @@
 import React, { useEffect, useState } from "react";
-import './ProdutoLista.css';
+import './CategoriaLista.css';
 import { useNavigate } from "react-router-dom";
-import { ProdutoService } from "../../../services/ProdutoService";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from "primereact/button";
 import { ConfirmDialog } from 'primereact/confirmdialog';
+import { CategoriaService } from "../../../services/CategoriaService";
 
-const ProdutoLista = () => {
+const CategoriaLista = () => {
 	const navigate = useNavigate();
-	const [produtos, setProdutos] = useState([]);
-	const produtoService = new ProdutoService();
+	const [categoria, setCategoria] = useState([]);
+	const categoriaService = new CategoriaService();
 	const [idExcluir, setIdExcluir] = useState(null);
 	const [dialogExcluir, setDialogExcluir] = useState(false);
 
 	useEffect(() => {
-		buscarProdutos();
+		buscarCategoria();
 	}, []);
 
-	const buscarProdutos = () => {
-		produtoService.listar().then(data => {
-			setProdutos(data.data);
+	const buscarCategoria = () => {
+		categoriaService.listar().then(data => {
+			setCategoria(data.data);
 		})
 	}
 
 	const formulario = () => {
-		navigate("/produto-formulario");
+		navigate("/categoria-formulario");
 	}
 
 	const alterar = (rowData) => {
 		//console.log(rowData);
-		navigate("/produto-formulario", { state: { produtoAlterar: rowData } })
+		navigate("/categoria-formulario", { state: { categoriaAlterar: rowData } })
 	}
 
 	const excluir = () => {
-		produtoService.excluir(idExcluir).then(data=>{
-			buscarProdutos();
+		categoriaService.excluir(idExcluir).then(data=>{
+			buscarCategoria();
 		});
 	}
 
@@ -51,25 +51,21 @@ const ProdutoLista = () => {
 
 	return (
 		<div className="container">
-			<h2>Lista de Produtos</h2>
-			<button onClick={formulario}>Novo Produto</button>
+			<h2>Lista de Categorias</h2>
+			<button onClick={formulario}>Nova Categoria</button>
 			<br /><br />
-			<DataTable value={produtos} tableStyle={{ minWidth: '50rem' }}>
+			<DataTable value={categoria} tableStyle={{ minWidth: '50rem' }}>
 				<Column field="id" header="Id"></Column>
-				<Column field="descricao" header="Descrição"></Column>
-				<Column field="valor" header="Valor"></Column>
-				<Column field="valorPromocional" header="Valor Promocional"></Column>
+				<Column field="nome" header="Nome"></Column>
 				<Column header="Opções" body={optionColumn}></Column>
 			</DataTable>
 
 			<ConfirmDialog visible={dialogExcluir} onHide={() => setDialogExcluir(false)} message="Deseja excluir?"
 				header="Confirmação" icon="pi pi-exclamation-triangle" accept={excluir} reject={() => setIdExcluir(null)} acceptLabel="Sim" rejectLabel="Não"/>
 
-			{/* 	{produtos.map((produto)=>
-				<p key={produto.id}>{produto.descricao} {produto.valor}</p>	
-			)} */}
+
 		</div>
 	);
 }
 
-export default ProdutoLista;
+export default CategoriaLista;

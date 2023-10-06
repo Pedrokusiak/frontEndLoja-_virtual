@@ -9,7 +9,7 @@ const PermissaoFormulario = (props) => {
 	///const { id } = location.state || {};
 	//const { ii } = useParams();
 	const navigate = useNavigate();
-	const permissaoNovo = { descricao: '', valor: 0, valorPromocional: 0 };
+	const permissaoNovo = { nome: ''};
 	const location = useLocation();
 	const { permissaoAlterar } = location.state || {};
 
@@ -49,7 +49,7 @@ const PermissaoFormulario = (props) => {
 	return (
 		<div style={{ padding: '10px' }}>
 			<h2>Inserir ou Alterar um Permissao</h2>
-			<input type="text" name="descricao" value={permissao.nome} onChange={alterarValor} /><br /><br />
+			<input type="text" name="nome" value={permissao.nome} onChange={alterarValor} /><br /><br />
 			<button onClick={salvar}>Salvar</button>
 			<button onClick={listaPermissao}>Lista Permissao</button>
 		</div>

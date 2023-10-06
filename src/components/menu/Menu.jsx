@@ -17,7 +17,7 @@ const Menu = () => {
       <ul>
         <li onClick={()=>navegar("/")}>Home</li>
 		    <li onClick={() => navegar("/produtos")}>Produtos</li>
-		    <li onClick={() => navegar("/categorias")}>Categoria</li>
+		    <li onClick={() => navegar("/categoria")}>Categoria</li>
 		    <li onClick={() => navegar("/marcas")}>Marca</li>
 		    <li onClick={() => navegar("/estados")}>Estado</li>
 		    <li onClick={() => navegar("/permissao")}>Permissão</li>

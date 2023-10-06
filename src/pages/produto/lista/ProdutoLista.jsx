@@ -6,6 +6,8 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from "primereact/button";
 import { ConfirmDialog } from 'primereact/confirmdialog';
+import { Paginator } from 'primereact/paginator';
+
 
 const ProdutoLista = () => {
 	const navigate = useNavigate();
@@ -13,13 +15,21 @@ const ProdutoLista = () => {
 	const produtoService = new ProdutoService();
 	const [idExcluir, setIdExcluir] = useState(null);
 	const [dialogExcluir, setDialogExcluir] = useState(false);
+	const[first, setFirst] = useState(0);
+	const[rows, setRows] = useState(5);
 
 	useEffect(() => {
 		buscarProdutos();
-	}, []);
+	}, [first, rows]);
+
+	const onPageChange = (event) =>{
+		setFirst(event.first);
+		setRows(event.rows);
+	}
 
 	const buscarProdutos = () => {
-		produtoService.listar().then(data => {
+		const page = first/rows;
+		produtoService.listar(page, rows).then(data => {
 			setProdutos(data.data);
 		})
 	}
@@ -54,20 +64,19 @@ const ProdutoLista = () => {
 			<h2>Lista de Produtos</h2>
 			<button onClick={formulario}>Novo Produto</button>
 			<br /><br />
-			<DataTable value={produtos} tableStyle={{ minWidth: '50rem' }}>
+			<DataTable value={produtos.content} tableStyle={{ minWidth: '50rem' }}>
 				<Column field="id" header="Id"></Column>
 				<Column field="descricao" header="Descrição"></Column>
 				<Column field="valor" header="Valor"></Column>
 				<Column field="valorPromocional" header="Valor Promocional"></Column>
 				<Column header="Opções" body={optionColumn}></Column>
 			</DataTable>
-
+			<Paginator first={first} rows={rows} totalRecords={produtos.totalElements} rowsPerPageOptions={[5, 10, 20, 30]} onPageChange={onPageChange} />
+			
 			<ConfirmDialog visible={dialogExcluir} onHide={() => setDialogExcluir(false)} message="Deseja excluir?"
 				header="Confirmação" icon="pi pi-exclamation-triangle" accept={excluir} reject={() => setIdExcluir(null)} acceptLabel="Sim" rejectLabel="Não"/>
 
-			{/* 	{produtos.map((produto)=>
-				<p key={produto.id}>{produto.descricao} {produto.valor}</p>	
-			)} */}
+
 		</div>
 	);
 }

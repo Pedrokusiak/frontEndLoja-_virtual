@@ -50,7 +50,7 @@ const EstadoFormulario = (props) => {
 		<div style={{ padding: '10px' }}>
 			<h2>Inserir ou Alterar um Estado</h2>
 			<input type="text" name="nome" value={estado.nome} onChange={alterarValor} /><br /><br />
-			<input type="text" name="sigla" value={estado.sigla} onChange={alterarValor} /><br /><br />
+			<input maxLength="2" type="text" name="sigla" value={estado.sigla} onChange={alterarValor} /><br /><br />
 			<button onClick={salvar}>Salvar</button>
 			<button onClick={listaEstados}>Lista Estados</button>
 		</div>
