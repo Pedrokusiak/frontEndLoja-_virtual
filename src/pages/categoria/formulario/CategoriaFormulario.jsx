@@ -9,7 +9,7 @@ const CategoriaFormulario = (props) => {
 	///const { id } = location.state || {};
 	//const { ii } = useParams();
 	const navigate = useNavigate();
-	const categoriaNovo = { descricao: '', valor: 0, valorPromocional: 0 };
+	const categoriaNovo = { nome: ''};
 	const location = useLocation();
 	const { categoriaAlterar } = location.state || {};
 
@@ -33,6 +33,11 @@ const CategoriaFormulario = (props) => {
 	}
 
 	const salvar = () => {
+
+		if (!categoria.nome) {
+			alert('O campo nome não pode estar vazio');
+			return; 
+		}
 		if (categoria.id) {
 			categoriaService.alterar(categoria).then(data => {
 				console.log(data);
@@ -47,13 +52,20 @@ const CategoriaFormulario = (props) => {
 	}
 
 	return (
-		<div style={{ padding: '10px' }}>
-			<h2>Inserir ou Alterar um Categoria</h2>
-			<input type="text" name="nome" value={categoria.nome} onChange={alterarValor} /><br /><br />
-			<button onClick={salvar}>Salvar</button>
-			<button onClick={listaCategoria}>Lista Categorias</button>
+		<div className="categoria-form">
+		  <h2>Inserir ou Alterar uma Categoria</h2>
+		  <div className="input-group">
+			<label htmlFor="nome" className="label-nome">Nome:</label>
+			<input type="text" id="nome" name="nome" value={categoria.nome} onChange={alterarValor} className="input-nome" />
+		  </div>
+		  <div className="button-group">
+			<button onClick={salvar} className="btn-salvar">Salvar</button>
+			<button onClick={listaCategoria} className="btn-lista">Lista Categorias</button>
+		  </div>
 		</div>
-	);
+	  );
+	  
+	  
 }
 
 export default CategoriaFormulario;

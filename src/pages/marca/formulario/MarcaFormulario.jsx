@@ -33,6 +33,11 @@ const MarcaFormulario = (props) => {
 	}
 
 	const salvar = () => {
+		if (!marca.nome) {
+			alert('O campo nome não pode estar vazio');
+			return; 
+		}
+
 		if (marca.id) {
 			marcaService.alterar(marca).then(data => {
 				console.log(data);
@@ -47,13 +52,18 @@ const MarcaFormulario = (props) => {
 	}
 
 	return (
-		<div style={{ padding: '10px' }}>
-			<h2>Inserir ou Alterar uma Marca</h2>
-			<input type="text" name="nome" value={marca.descricao} onChange={alterarValor} /><br /><br />
-			<button onClick={salvar}>Salvar</button>
-			<button onClick={listaMarcas}>Lista Marcas</button>
+		<div className="marca-form">
+		  <h2>Inserir ou Alterar uma Marca</h2>
+		  <div className="input-group">
+			<label htmlFor="nome" className="label-nome">Nome:</label>
+			<input type="text" id="nome" name="nome" value={marca.nome} onChange={alterarValor} className="input-nome" />
+		  </div>
+		  <div className="button-group">
+			<button onClick={salvar} className="btn-salvar">Salvar</button>
+			<button onClick={listaMarcas} className="btn-lista">Lista de Marcas</button>
+		  </div>
 		</div>
-	);
+	  );
 }
 
 export default MarcaFormulario;

@@ -1,5 +1,10 @@
 .menu {
-	padding: 10px;
+  padding: 10px;
+  position: fixed;
+  top: 0; /* Fixar o menu no topo */
+  left: 0; /* Fixar o menu na esquerda */
+  width: 100%; /* Preencher toda a largura da tela */
+  z-index: 100; /* Definir um valor de z-index para garantir que o menu fique acima de outros elementos */
 }
 
 ul {

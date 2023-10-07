@@ -33,6 +33,14 @@ const EstadoFormulario = (props) => {
 	}
 
 	const salvar = () => {
+		if (!estado.nome) {
+			alert('O campo nome não pode estar vazio');
+			return; 
+		}
+		if (!estado.sigla) {
+			alert('O campo sigla não pode estar vazio');
+			return; 
+		}
 		if (estado.id) {
 			estadoService.alterar(estado).then(data => {
 				console.log(data);
@@ -47,14 +55,23 @@ const EstadoFormulario = (props) => {
 	}
 
 	return (
-		<div style={{ padding: '10px' }}>
-			<h2>Inserir ou Alterar um Estado</h2>
-			<input type="text" name="nome" value={estado.nome} onChange={alterarValor} /><br /><br />
-			<input maxLength="2" type="text" name="sigla" value={estado.sigla} onChange={alterarValor} /><br /><br />
-			<button onClick={salvar}>Salvar</button>
-			<button onClick={listaEstados}>Lista Estados</button>
+		<div className="estado-form"> 
+		  <h2>Inserir ou Alterar um Estado</h2>
+		  <div className="input-group">
+			<label htmlFor="nome" className="label-nome">Nome:</label>
+			<input type="text" id="nome" name="nome" value={estado.nome} onChange={alterarValor} className="input-nome" />
+		  </div>
+		  <div className="input-group">
+			<label htmlFor="sigla" className="label-sigla">Sigla:</label>
+			<input type="text" id="sigla" name="sigla" value={estado.sigla} onChange={alterarValor} className="input-sigla" />
+		  </div>
+		  <div className="button-group">
+			<button onClick={salvar} className="btn-salvar">Salvar</button>
+			<button onClick={listaEstados} className="btn-lista">Lista Estados</button>
+		  </div>
 		</div>
-	);
-}
+	  );
+	}
+
 
 export default EstadoFormulario;

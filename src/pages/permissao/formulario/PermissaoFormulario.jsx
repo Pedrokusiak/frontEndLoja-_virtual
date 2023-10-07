@@ -33,6 +33,11 @@ const PermissaoFormulario = (props) => {
 	}
 
 	const salvar = () => {
+
+		if (!permissao.nome) {
+			alert('O campo nome não pode estar vazio');
+			return; 
+		}
 		if (permissao.id) {
 			permissaoService.alterar(permissao).then(data => {
 				console.log(data);
@@ -47,13 +52,18 @@ const PermissaoFormulario = (props) => {
 	}
 
 	return (
-		<div style={{ padding: '10px' }}>
-			<h2>Inserir ou Alterar um Permissao</h2>
-			<input type="text" name="nome" value={permissao.nome} onChange={alterarValor} /><br /><br />
-			<button onClick={salvar}>Salvar</button>
-			<button onClick={listaPermissao}>Lista Permissao</button>
+		<div className="permissao-form">
+		  <h2>Inserir ou Alterar uma Permissão</h2>
+		  <div className="input-group">
+			<label htmlFor="nome" className="label-nome">Nome:</label>
+			<input type="text" id="nome" name="nome" value={permissao.nome} onChange={alterarValor} className="input-nome" />
+		  </div>
+		  <div className="button-group">
+			<button onClick={salvar} className="btn-salvar">Salvar</button>
+			<button onClick={listaPermissao} className="btn-lista">Lista de Permissões</button>
+		  </div>
 		</div>
-	);
+	  );
 }
 
 export default PermissaoFormulario;
