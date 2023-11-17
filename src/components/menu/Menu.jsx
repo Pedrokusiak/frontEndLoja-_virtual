@@ -21,6 +21,8 @@ const Menu = () => {
 		    <li onClick={() => navegar("/marcas")}>Marca</li>
 		    <li onClick={() => navegar("/estados")}>Estado</li>
 		    <li onClick={() => navegar("/permissao")}>Permissão</li>
+			<li onClick={() => navegar("/cidade")}>Cidade</li>
+		    <li onClick={() => navegar("/pessoas")}>Pessoa</li>
         <li onClick={()=>setDark(!dark)}>Mudar Tema</li>		
       </ul>
     </div>

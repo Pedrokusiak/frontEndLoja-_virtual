@@ -69,7 +69,7 @@ const ProdutoFormulario = (props) => {
 	}
 
 	return (
-		<div>
+		<div className="produto-form">
 			<h2>Inserir ou Alterar um Produto</h2>
 			<label htmlFor="descricao">Nome:</label>
 			<input type="text" name="descricao" value={produto.descricao} onChange={alterarValor} /><br /><br />
@@ -84,7 +84,7 @@ const ProdutoFormulario = (props) => {
 				<p className="erro-campos-vazios">O valor promocional deve ser maior que zero.</p>
 			)}
 			{erroCamposVazios && (
-				<p className="erro-campos-vazios">Preencha todos os campos antes de salvar.</p>
+				<p className="erro-campos-vazios">Przeencha todos os campos antes de salvar.</p>
 			)}
 			<button onClick={salvar}>Salvar</button>
 			<button onClick={listaProdutos}>Lista Produtos</button>

@@ -14,6 +14,10 @@ import CategoriaLista from './pages/categoria/lista/CategoriaLista';
 import CategoriaFormulario from './pages/categoria/formulario/CategoriaFormulario';
 import MarcaLista from './pages/marca/lista/MarcaLista';
 import MarcaFormulario from './pages/marca/formulario/MarcaFormulario';
+import CidadeLista from './pages/cidade/lista/CidadeLista';
+import CidadeFormulario from './pages/cidade/formulario/CidadeFormulario';
+import PessoaLista from './pages/pessoa/lista/PessoaLista';
+import PessoaFormulario from './pages/pessoa/formulario/PessoaFormulario';
 
         
 
@@ -40,6 +44,10 @@ function App() {
 						<Route path='/marca-formulario' Component={MarcaFormulario}/>
 						<Route path='/permissao' Component={PermissaoLista}/>
 						<Route path='/permissao-formulario' Component={PermissaoFormulario}/>
+						<Route path='/cidade' Component={CidadeLista} />
+						<Route path='/cidade-formulario' Component={CidadeFormulario}/>
+						<Route path='/pessoas' Component={PessoaLista} />
+						<Route path='/pessoa-formulario' Component={PessoaFormulario}/>
 					</Routes>
 					<Rodape />
 				</BrowserRouter>

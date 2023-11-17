@@ -1,61 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import './ProdutoFormulario.css';
-import { ProdutoService } from "../../../services/ProdutoService";
+import './CidadeFormulario.css';
+import { CidadeService } from "../../../services/CidadeService";
 
-const ProdutoFormulario = (props) => {
-	//const navigate = useNavigate();
-	//const location = useLocation();
-	///const { id } = location.state || {};
-	//const { ii } = useParams();
+const CidadeFormulario = (props) => {
 	const navigate = useNavigate();
-	const produtoNovo = { descricao: '', valor: 0, valorPromocional: 0 };
+	const cidadeNova = { nome: '', sigla: ''};
 	const location = useLocation();
-	const { produtoAlterar } = location.state || {};
+	const { cidadeAlterar } = location.state || {};
 
-	const [produto, setProduto] = useState(produtoNovo);
-	const produtoService = new ProdutoService();
+	const [cidade, setCidade] = useState(cidadeNova);
+	const cidadeService = new CidadeService();
 
 	useEffect(() => {
-		if(produtoAlterar){
-			setProduto(produtoAlterar);
+		if(cidadeAlterar){
+			setCidade(cidadeAlterar);
 		}else{
-			setProduto(produtoNovo);
+			setCidade(cidadeNova);
 		}		
 	}, []);
 
-	const listaProdutos = () =>{
-		navigate("/produtos")
+	const listaCidades = () =>{
+		navigate("/cidade")
 	}
 
 	const alterarValor = (event) => {
-		setProduto({ ...produto, [event.target.name]: event.target.value });
+		setCidade({ ...cidade, [event.target.name]: event.target.value });
 	}
 
 	const salvar = () => {
-		if (produto.id) {
-			produtoService.alterar(produto).then(data => {
+		if (cidade.id) {
+			cidadeService.alterar(cidade).then(data => {
 				console.log(data);
-				setProduto(produtoNovo);
+				setCidade(cidadeNova);
 			});
 		} else {
-			produtoService.inserir(produto).then(data => {
+			cidadeService.inserir(cidade).then(data => {
 				console.log(data);
-				setProduto(produtoNovo);
+				setCidade(cidadeNova);
 			});
 		}
+		listaCidades();
 	}
 
 	return (
-		<div style={{ padding: '10px' }}>
-			<h2>Inserir ou Alterar um Produto</h2>
-			<input type="text" name="descricao" value={produto.descricao} onChange={alterarValor} /><br /><br />
-			<input type="number" name="valor" value={produto.valor} onChange={alterarValor} /><br /><br />
-			<input type="number" name="valorPromocional" value={produto.valorPromocional} onChange={alterarValor} /><br /><br />
-			<button onClick={salvar}>Salvar</button>
-			<button onClick={listaProdutos}>Lista Produtos</button>
+		<div className="cidade-form">
+		  <h2>Inserir ou Alterar uma Cidade</h2>
+		  <div className="input-group">
+			<label htmlFor="nome" className="label-nome">Nome:</label>
+			<input type="text" id="nome" name="nome" value={cidade.nome} onChange={alterarValor} className="input-nome" />
+		  </div>
+		  <div className="button-group">
+			<button onClick={salvar} className="btn-salvar">Salvar</button>
+			<button onClick={listaCidades} className="btn-lista">Lista Cidades</button>
+		  </div>
 		</div>
-	);
+	  );
+	  
+	  
 }
 
-export default ProdutoFormulario;
+export default CidadeFormulario;
